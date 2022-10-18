@@ -18,7 +18,7 @@
           <div class="content-section-blog">
             <div class="picrure">
               <a href="{{ article.url }}">
-                <img src="{{ article.image.src | img_url: 'original' }}" alt="{{ article.title  }}" class="img-fluid">
+                <img data-src="{{ article.image.src | img_url: 'original' }}" alt="{{ article.title  }}" class="lazy2 img-fluid">
               </a>				
             </div>
             <div class="info_blog">
