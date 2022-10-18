@@ -1,0 +1,128 @@
+
+<section class="register">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="register_banner">
+          <h4 class="banner-title">Register</h4>
+        </div>
+      </div>
+      <div class="col-md-6">
+        
+
+        <embed src="https://roseprivee.com/registration-form/"
+    	    width="500px" 
+    	    height="600" />
+
+      </div>
+      <div class="col-md-6">
+        <div class="benefit">
+          <h3 class="benefit-title">Benefits of registering</h3>
+          <h4 class="benefit-subtitle">Here are the benefits you get when you register:</h4>
+
+        <div class="benefit-list">
+          <ul>
+
+             {% for block in section.blocks %}  
+              {% case block.type %}
+
+            {% when 'link' %}   
+            <li class="item">
+              <div class="list-icon">
+<!--                 <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---Bloomwards.png?v=1662114569" alt="icon"> -->
+                 <img class="zoom"
+                 srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                         {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                         {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                         {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+                         {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+                         {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+                 sizes="{% if block.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% endif %}"
+                 src="{{ block.settings.image | img_url: '1500x' }}"
+                 loading="lazy"
+                 alt="{{ block.settings.image.alt | escape }}"
+              
+                 >
+              </div>
+              <div class="list-content">
+<!--                 <h6>Posy Points™</h6> -->
+                <h6>{{ block.settings.heading }}</h6>
+<!--                 <p>Earn points on every order which you can claim for a discount on future orders.</p> -->
+                <p>{{ block.settings.text }}</p>
+              </div>
+            </li>
+
+              {% endcase %} 
+            {% endfor %}
+<!--             <li class="item">
+              <div class="list-icon">
+                <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---location.png?v=1662114569" alt="icon">
+              </div>
+              <div class="list-content">
+                <h6>Address book</h6>
+                <p>All of your addresses safely stored in one place for a faster checkout experience.</p>
+              </div>
+            </li>
+            <li class="item">
+              <div class="list-icon">
+                <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---reminder-service.png?v=1662114569" alt="icon">
+              </div>
+              <div class="list-content">
+                <h6>Reminder Service</h6>
+                <p>Earn points on every order which you can claim for a discount on future orders.</p>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "register",
+    "settings": [
+      	{
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }
+    ],
+    "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Icon",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "label": "Heading"
+        },
+        {
+          "id": "text",
+          "type": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

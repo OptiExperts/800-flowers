@@ -1,0 +1,43 @@
+.services_title {
+    font-family: 'Lato', arial, helvetica, sans-serif;
+    color: #444;
+    text-align: center;
+    padding-top: 65px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+.services_box_wrapper {
+    column-count: 2;
+    display: flex;
+    margin: 0 auto;
+    text-align: justify;
+    width: 100%;
+}
+.services_box_wrapper .services_left {
+    float: left;
+    width: 50%;
+    margin: 0rem 1rem;
+}
+.services_box_wrapper .services_right {
+    float: right;
+    width: 50%;
+    margin: 0rem 1rem;
+    padding: 0rem 1rem;
+}
+
+.services_box_wrapper .services_right h4{
+	width: 100%;
+  	display: table;
+  text-align: left;
+}
+
+.services_box_wrapper .services_right ul{
+	width: 100%;
+  display table;
+  column-count: 2;
+}
+
+.services_box_wrapper .services_right ul li p{
+	margin-bottom: 5px;
+  	text-align: left;
+}

@@ -1,0 +1,21 @@
+<div class="ca-cart ca-hide ca-template-default ">
+    <div class="errors ca-errors">
+        Please fill this out and you will be able to check out.
+    </div>
+    <div class="ca-attrs ca-row">
+                    <div class="ca-col-6 ca-code-greeting-card-message ">
+                {% assign match = true %}
+
+    {% if match == true %}
+                {% if customer and customer.metafields.customer_attribute['greeting-card-message'] %}
+    {% assign attribute_value = customer.metafields.customer_attribute['greeting-card-message'] %}
+{% else %}
+    {% assign attribute_value = "" %}
+{% endif %}
+    <label class="ca-label label-textarea-label ca-code-greeting-card-message  " for="greeting-card-message" >Greeting Card Message <span>*</span></label>
+<textarea class="ca-value ca-textarea ca-code-greeting-card-message  "  id="greeting-card-message" name="attributes[greeting-card-message]" required>{{attribute_value}}</textarea>
+                {% endif %}
+            </div>
+            </div>
+</div>
+

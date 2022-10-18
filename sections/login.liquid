@@ -1,0 +1,173 @@
+
+<section class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="login_banner">
+          <h4 class="banner-title">Sign in</h4>
+        </div>
+      </div>
+      <div class="col-md-6">
+        
+       
+          <div class="form-group">
+          <h3 class="form-title">Existing Customer?</h3>
+         
+
+            {% form 'customer_login' %}
+
+            {{ form.errors | default_errors }}
+
+          <div class="form-group row">  
+             <label for="E-mail">Email Address</label>
+            <div class="col-sm-12">
+              <input type="email"  class="form-control" name="customer[email]"  placeholder="{{ 'customer.login.email' | t }}" required>
+            </div>
+          </div>
+
+          {% if form.password_needed %}
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">{{ 'customer.login.password' | t }} </label>
+            <div class="col-sm-12">
+              <input type="password" class="form-control"  placeholder="{{ 'customer.login.password' | t }}" name="customer[password]" required>
+            </div>
+          </div>
+        {% endif %}
+
+              <div class="button-box">
+            <div class="text-center">
+            <button class="btn btn-dark" value="{{ 'customer.login.log_in' | t }}">
+              {{ 'customer.login.log_in' | t }}
+            </button>
+          </div>
+              </div>
+            
+            {% endform %} 
+
+            
+          </div>
+    
+
+      </div>
+      <div class="col-md-6">
+        <div class="benefit">
+          <h3 class="benefit-title">New to 800Flower</h3>
+          <h4 class="benefit-subtitle">Here are the benefits you get when you register:</h4>
+
+        <div class="benefit-list">
+          <ul>
+
+             {% for block in section.blocks %}  
+              {% case block.type %}
+
+            {% when 'link' %}   
+            <li class="item">
+              <div class="list-icon">
+<!--                 <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---Bloomwards.png?v=1662114569" alt="icon"> -->
+                 <img class="zoom"
+                 srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                         {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                         {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                         {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                         {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+                         {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+                         {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+                 sizes="{% if block.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% endif %}"
+                 src="{{ block.settings.image | img_url: '1500x' }}"
+                 loading="lazy"
+                 alt="{{ block.settings.image.alt | escape }}"
+              
+                 >
+              </div>
+              <div class="list-content">
+<!--                 <h6>Posy Points™</h6> -->
+                <h6>{{ block.settings.heading }}</h6>
+<!--                 <p>Earn points on every order which you can claim for a discount on future orders.</p> -->
+                <p>{{ block.settings.text }}</p>
+              </div>
+            </li>
+
+              {% endcase %} 
+            {% endfor %}
+<!--             <li class="item">
+              <div class="list-icon">
+                <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---location.png?v=1662114569" alt="icon">
+              </div>
+              <div class="list-content">
+                <h6>Address book</h6>
+                <p>All of your addresses safely stored in one place for a faster checkout experience.</p>
+              </div>
+            </li>
+            <li class="item">
+              <div class="list-icon">
+                <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Register-page---reminder-service.png?v=1662114569" alt="icon">
+              </div>
+              <div class="list-content">
+                <h6>Reminder Service</h6>
+                <p>Earn points on every order which you can claim for a discount on future orders.</p>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+
+          <a href="https://www.800flower.ae/pages/register" class="btn btn-primary">Register</a>
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  .form-group .col-sm-12 {
+    padding: 0;
+}
+</style>            
+
+
+{% schema %}
+  {
+    "name": "login",
+    "settings": [
+      	{
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }
+    ],
+    "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Icon",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "label": "Heading"
+        },
+        {
+          "id": "text",
+          "type": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

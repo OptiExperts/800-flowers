@@ -1,0 +1,61 @@
+{%- unless is_admin_interface -%}
+	{%- capture __html -%}
+		{{ html }}
+	{%- endcapture -%}
+
+	{% comment %} Finding LCP for pages {% endcomment %}
+	{%- assign image_lcp = '' -%}
+	{%- capture find -%}{{ template.name }}_image_lcp [{%- endcapture -%}
+	{%- assign chanks = __html | split: find -%}
+
+	{%- capture image_lcp -%}
+	{% for ch in chanks %}
+	{%- unless forloop.first -%}
+		{%- assign __ch = ch | split: ']' -%}
+		<link rel="preload" as="image" href="{{ __ch[0] }}">
+	{%- endunless -%}
+	{% endfor %}
+	{%- endcapture -%}	
+
+	
+
+
+	{% assign chanks = __html | split: '<iframe' %}
+
+	{% for ch in chanks %}
+		{%- unless forloop.first -%}
+			{% assign __chanks = ch | split: '</iframe>' %}
+
+			{% if __chanks[0].size > 0 %}
+				{%- assign source = __chanks[0] -%}
+				{%- assign destination = '' -%}
+
+				{%- if source contains ' src=' -%}
+					{%- if source contains 'youtube' -%}
+						{%- assign destination = source | replace: ' src=', ' data-src=' -%}
+						{%- assign __html = __html | replace: source, destination -%}
+					{%- else if source contains 'vimeo' -%}
+						{%- assign destination = source | replace: ' src=', ' data-src=' -%}
+						{%- assign __html = __html | replace: source, destination -%}
+					{%- endif -%}
+				{%- endif -%}
+
+			{% endif %}
+			
+		{%- endunless -%}
+	{% endfor %}
+	
+
+	{%- assign html = __html
+		| replace: '<!-- preload_image_lcp -->', image_lcp
+		| replace: '<link href="https://monorail-edge.shopifysvc.com" rel="dns-prefetch">', ''
+		| replace: 'const previewBarInjector', 'return; adminBarInjector'
+		| replace: 'const adminBarInjector', 'return; adminBarInjector'
+		| replace: '<img', '<img decoding="async" loading="lazy"'
+		| replace: 'decoding="async" loading="lazy" class="lcp', 'loading="eager" class="lcp'
+		| replace: 'o.addEventListener("DOMContentLoaded"', 'o.addEventListener("D1OMContentLoaded"'
+		| replace: '<link href="//cdn1.stamped.io/', '<link data-href="//cdn1.stamped.io/'
+	-%}
+{%- endunless -%}
+
+{{ html }}

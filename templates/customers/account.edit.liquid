@@ -1,0 +1,14 @@
+<form id="account-form" action="//ca.secomapp.com/api/account" method="post">
+    <input type="hidden" name="id" value="{{customer.id}}">
+    <input type="hidden" name="shop" value="800flowerae.myshopify.com">
+            <label class="ca-label ca-input-label ca-text-label ca-code-first_name ca-account ca-hide " for="first_name">{{ 'customer.register.first_name' | t }}</label>
+
+<input class="ca-value ca-input ca-text ca-code-first_name ca-account ca-hide "   type="text" name="first_name" id="first_name" value="{{customer.first_name}}" placeholder="{{ 'customer.register.first_name' | t }}"/>
+
+            <label class="ca-label ca-input-label ca-text-label ca-code-last_name ca-account ca-hide " for="last_name">{{ 'customer.register.last_name' | t }}</label>
+
+<input class="ca-value ca-input ca-text ca-code-last_name ca-account ca-hide "   type="text" name="last_name" id="last_name" value="{{customer.last_name}}" placeholder="{{ 'customer.register.last_name' | t }}"/>
+
+        <input type="submit" value="Update">
+    or <a href="/account" class="cancel">Back to Account</a>
+</form>

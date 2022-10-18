@@ -1,0 +1,70 @@
+.color--{
+	background-color:red;
+}
+
+.contact-section .container{
+	display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 30px;
+}
+.sub_title {
+    color: #fff !important;
+    text-align: center;
+}
+ h3.sub_heading {
+    color: #fff;
+    padding-top: 0 !important;
+}
+ .contactus-text {
+    width: 70%;
+    max-width: 70%;
+}
+ .custom_button a {
+    display: block;
+    padding: 10px 45px;
+}
+
+.custom_button {
+    border-radius: 10px;
+    margin: 28px auto;
+}
+.custom_button .title {
+  font-size: 29px !important;
+  justify-content: center;
+  margin-top: 10px;
+  font-weight:700;
+}
+.sub_title .main_heading {
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: 400;
+}
+.sub_title .sub_heading {
+    color: #fff;
+    padding-top: 5px;
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+@media all and (max-width: 767px) {
+.sub_title .sub_heading  {
+    font-size: 15px;
+}
+.sub_title .main_heading{
+  font-size: 17px;  
+}
+.contactus-text{
+   width:100%;
+}
+.custom_button .title {
+    font-size: 20px!important;
+    margin: 5px 0;
+    }
+    custom_button h3{
+    margin-bottom:0 !important;
+    }
+    .custom_button a{
+        padding: 5px 45px;
+    }
+}

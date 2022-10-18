@@ -1,0 +1,92 @@
+{% assign variant_apply = 'matching_include_variants' %}
+{% assign variants = '' %}
+{% assign collections = '' %}
+{% assign tags = '' %}
+
+{% assign match = true %}
+{% if cart.item_count > 0 %}
+
+    {% if variants != blank %}
+        {% assign variantIds = ',' | append: variants | append: ',' %}
+    {% endif %}
+    {% if collections != blank %}
+        {% assign colIds = ',' | append: collections | append: ',' %}
+    {% endif %}
+    {% if tags != blank %}
+        {% assign tagIds = ',' | append: tags | append: ',' | downcase %}
+    {% endif %}
+
+    {% assign match = false %}
+
+    {% for item in cart.items %}
+        {% assign matchVariant = false %}
+
+        <!-- variants format id,id -->
+        {% if variants != blank %}
+            {% assign wrapId = ',' | append: item.variant_id | append: ',' %}
+            {% if variantIds contains wrapId %}
+                {% assign matchVariant = true %}
+            {% endif %}
+        {% elsif variant_apply == 'variants' %}
+            {% assign matchVariant = true %}
+        {% endif %}
+
+        {% if variant_apply == 'variants' %}
+            {% if matchVariant %}
+                {% assign match = true %}
+                {% break %}
+            {% else %}
+                {% assign match = false %}
+                {% continue %}
+            {% endif %}
+        {% elsif variant_apply == 'matching_include_variants' %}
+            {% assign match = matchVariant %}
+            {% if matchVariant %}
+                {% assign match = true %}
+                {% break %}
+            {% endif %}
+        {% elsif variant_apply == 'matching_except_variants' %}
+            {% if matchVariant %}
+                {% assign match = false %}
+                {% continue %}
+            {% endif %}
+        {% endif %}
+
+        {% assign matchRule = true %}
+
+        <!-- collections format id,id -->
+        {% if collections != blank %}
+            {% assign matchRule = false %}
+            {% for collection in item.product.collections %}
+                {% assign wrapId = ',' | append: collection.id | append: ',' %}
+                {% if colIds contains wrapId %}
+                    {% assign matchRule = true %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <!-- tags format tag,tag -->
+        {% if tags != blank and matchRule == true %}
+            {% assign matchRule = false %}
+            {% for tag in item.product.tags %}
+                {% assign wrapTag = ',' | append: tag | append: ',' | downcase %}
+                {% if tagIds contains wrapTag %}
+                    {% assign matchRule = true %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if matchRule %}
+            {% assign match = true %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
+
+
+{% if match == true %}
+<p class="exat-attribute cart-attribute__field"><label>Greeting Card Message *</label><textarea required  id="attribute_2173" name="attributes[Greeting Card Message]">{{ cart.attributes["Greeting Card Message"] }}</textarea><label for="attributes[Greeting Card Message]" class="error">Greeting Card Message is required.</label></p>
+{% endif %}

@@ -1,0 +1,107 @@
+{{ 'announcement.css' | asset_url | stylesheet_tag }}
+<div class="announcement-bar">
+  <div class="container container-v1">
+    <div class="row">
+      <div class="col-12">
+        <ul class="main-nav">
+          {% for block in section.blocks %}
+            <li>
+              {% if block.settings.text !=blank %}
+              <a href="javascript:void(0)">
+                {% comment %}<span class="icon-cod_{{ forloop.index }}"></span>{% endcomment %}
+                {% if block.settings.image !=blank %}
+                <img src="{{ block.settings.image | img_url:'small' }}">
+                {% endif %}
+                {{ block.settings.text }}
+                
+              </a>
+              {% endif %}
+              <ul class="submenu">
+                {% for i in (1..6)%}
+                {% capture content %}text_{{ i }}{% endcapture %}
+                {% assign cus_text = block.settings[content] %}
+
+                {% if cus_text !=blank %}
+                <li class="menu-items">
+                  <a href="javascript:void(0)">{{ cus_text }}</a>
+                </li>
+                {% endif %}
+                {% comment %}
+                <li class="menu-items">
+                  <a href="javascript:void(0)">Pay when you receive your order with Cash on Delivery</a>
+                </li>
+                <li class="menu-items">
+                  <a href="javascript:void(0)">T&amp;Cs Apply</a>
+                </li>
+                {% endcomment %}
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      
+	],
+	"blocks": [
+      {
+		"type": "announcement",
+		"name": "Announcement",
+		"settings": [
+		  {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+		  {
+            "type": "text",
+            "id": "text",
+            "label": "Heading"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_1",
+            "label": "Content"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_2",
+            "label": "Content"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_3",
+            "label": "Content"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_4",
+            "label": "Content"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_5",
+            "label": "Content"
+          },
+		  {
+            "type": "textarea",
+            "id": "text_6",
+            "label": "Content"
+          }
+		]
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

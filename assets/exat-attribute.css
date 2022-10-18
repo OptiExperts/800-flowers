@@ -1,0 +1,57 @@
+.exat-attribute{
+    display: block;
+}
+.exat-attribute label{
+    display: block;
+    text-transform: none !important;
+}
+.exat-attribute input[type="radio"],.exat-attribute input[type="checkbox"]{
+    min-width: auto !important;
+    margin-right: 3px;
+}
+.exat-attribute.cart-attribute__field input[type="text"], .exat-attribute.cart-attribute__field select, .exat-attribute.cart-attribute__field textarea{
+    width:50%;
+    min-height:30px;
+    border: 1px solid #cdc9c9;
+}
+.exat-attribute.cart-attribute__field input[type="text"]:focus, .exat-attribute.cart-attribute__field select:focus, .exat-attribute.cart-attribute__field textarea:focus{
+    border:none;
+}
+.exat-attribute input.error, .exat-attribute select.error, .exat-attribute textarea.error {
+    border: 1px dotted red;
+}
+.exat-attribute .block {
+	display: block;
+}
+.exat-attribute label.error {
+   display: none;
+  	color: red;
+}
+.exat-attribute .exat-datepicker{
+    background-image: url(https://customized-attribute.pifyapp.com/assets/images/date.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
+.exat-rich-text{
+	margin: 0 0 20px;
+}
+.exat-rich-text ol{
+	margin:0 !important;
+}
+.exat-rich-text p{
+	margin: 0 0 8px !important;
+  	line-height: 150%;
+}
+.exat-attribute .option-item-block{
+    display:inline;margin-right:10px;
+}
+@media screen and (max-width: 500px) {
+    .exat-attribute .option-item-block{
+        display:block;
+      	margin: 10px;
+    }
+}
+.exat-term-attribute{
+    width: 100%;
+}

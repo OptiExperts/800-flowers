@@ -1,0 +1,302 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-sub1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+   
+
+  <div class="section-collection-sub1">
+    <div class="container container-v2">
+     <div class="row">
+     <div class="col-md-4 col-12">
+        <div class="col-item">
+          <div class="item">
+            <div class="info-collection">
+            	{% if section.settings.title_big1 != blank %}
+                <h3 class="title" style="color:{{section.settings.color_title}}">{{section.settings.title_big1}}</h3>
+                {% endif %}
+            </div>
+            <div class="box-img">
+              <a  href="{{section.settings.url_btn}}">
+              {% if section.settings.img_banner1 != blank %}
+              <img src="{{section.settings.img_banner1 | img_url:'master'}}" class="img-fluid">
+              {% else %}
+              <img src="//via.placeholder.com/558x700" class="img-fluid" alt="banner">
+              {% endif %}
+              
+            </a>
+            </div>
+            <div class="category-info">
+                <div class="box-info">
+                 {% if section.settings.btn_banner != blank %}
+                 <a href="{{section.settings.url_btn}}" class="btn-banner btn-banner-{{ section.id }}">{{section.settings.btn_banner}}</a>
+                 {% endif %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="col-item">
+          <div class="item">
+            <div class="info-collection">
+            	{% if section.settings.title_big2 != blank %}
+                <h3 class="title" style="color:{{section.settings.color_title}}">{{section.settings.title_big2}}</h3>
+                {% endif %}
+            </div>
+            <div class="box-img">
+              <a  href="{{section.settings.url_btn}}">
+              {% if section.settings.img_banner2 != blank %}
+              <img src="{{section.settings.img_banner2 | img_url:'master'}}" class="img-fluid">
+              {% else %}
+              <img src="//via.placeholder.com/558x700" class="img-fluid" alt="banner">
+              {% endif %}
+              
+            </a>
+            </div>
+            <div class="category-info">
+                <div class="box-info">
+                 {% if section.settings.btn_banner != blank %}
+                 <a href="{{section.settings.url_btn}}" class="btn-banner btn-banner-{{ section.id }}">{{section.settings.btn_banner}}</a>
+                 {% endif %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="col-item">
+          <div class="item">
+            <div class="info-collection">
+            	{% if section.settings.title_big3 != blank %}
+                <h3 class="title" style="color:{{section.settings.color_title}}">{{section.settings.title_big3}}</h3>
+                {% endif %}
+            </div>
+            <div class="box-img">
+              <a  href="{{section.settings.url_btn}}">
+              {% if section.settings.img_banner3 != blank %}
+              <img src="{{section.settings.img_banner3 | img_url:'master'}}" class="img-fluid">
+              {% else %}
+              <img src="//via.placeholder.com/558x700" class="img-fluid" alt="banner">
+              {% endif %}
+              
+            </a>
+            </div>
+            <div class="category-info">
+                <div class="box-info">
+                 {% if section.settings.btn_banner != blank %}
+                 <a href="{{section.settings.url_btn}}" class="btn-banner btn-banner-{{ section.id }}">{{section.settings.btn_banner}}</a>
+                 {% endif %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+                     
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-collection-sub1 .col-item .item .category-info .btn-banner-{{ section.id }} {
+    color: {{section.settings.color_btn}};
+    background: {{section.settings.bg_btn}};
+    transition: all .3s;
+    padding:15px 30px;
+  }
+  .section-collection-sub1 .col-item .item .category-info .btn-banner-{{ section.id }}:hover {
+    color: {{section.settings.color_btn_hover}};
+    background: {{section.settings.bg_btn_hover}};
+  }
+  
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection sub v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_breadcrumb",
+      "label": "Background Image BreadCrumb",
+      "info": "1920x510px recommended"
+    },
+	{
+      "type": "text",
+      "id": "title_big1",
+      "label": "Title 1",
+      "default": "Design to Tranform"
+    },
+	{
+      "type": "text",
+      "id": "title_big2",
+      "label": "Title 2",
+      "default": "Design to Tranform"
+    },
+{
+      "type": "text",
+      "id": "title_big3",
+      "label": "Title 3",
+      "default": "Design to Tranform"
+    },
+	{
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#fff"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": " Image Banner",
+      "info": "558x700px recommended"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": " Image Banner",
+      "info": "558x700px recommended"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner3",
+      "label": " Image Banner",
+      "info": "558x700px recommended"
+    },
+	{
+      "type": "text",
+      "id": "btn_banner",
+      "label": "Button banner",
+      "default": "SHOP NOW"
+    },
+	{
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color Button",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn",
+      "label": "Background Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_btn_hover",
+      "label": "Color Button hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn_hover",
+      "label": "Background Button Hover",
+      "default": "#fe7250"
+    },
+	{
+      "type": "url",
+      "id": "url_btn",
+      "label": "URL banner",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_info_collection",
+      "label": "Show Info Collection",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "prod_per_row",
+      "label": "Product Per Row",
+      "options": [
+        {
+          "value": "prod_col_12",
+          "label": "1 Collection Per Row"
+        },
+        {
+          "value": "prod_col_6",
+          "label": "2 Collection Per Row"
+        },
+        {
+          "value": "prod_col_4",
+          "label": "3 Collection Per Row"
+        },
+        {
+          "value": "prod_col_3",
+          "label": "4 Collection Per Row"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "block_collection",
+          "label": "Select Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection sub v1",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

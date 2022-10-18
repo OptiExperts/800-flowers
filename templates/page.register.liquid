@@ -1,0 +1,268 @@
+<style>
+
+section.breadcrumb{
+  background-color: transparent;
+}
+
+  section.register .row{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  section.register .row .col-md-6, section.register .row .col-md-12{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+section.breadcrumb .breadcrumb-list{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+  section.breadcrumb .breadcrumb-list .breadcrumb_item{
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section.breadcrumb .breadcrumb-list .breadcrumb_item::after{
+    content: "»";
+    position: relative;
+    margin: 0 5px;
+    font-size: 16px;
+    
+  }
+
+  section.breadcrumb .breadcrumb-list .breadcrumb_item a{
+    text-decoration: underline;
+  }
+
+  section.breadcrumb .breadcrumb-list .breadcrumb_item:nth-last-child(1):after{
+    display: none;
+  }
+
+
+  .register .register_banner{
+    background: #71567f;
+    color: #fff;
+    padding: 30px;
+    margin-bottom: 25px;
+  }
+
+  .register .register_banner .banner-title{
+    margin-bottom: 0px;
+  }
+
+  .register form, .register .break, .register .facebook{
+    padding: 0 56px;
+  }
+
+  .register form label, .register form input{
+    float: left;
+    width: 100%;
+    display: block;
+  }
+
+  .register form input{
+    margin-bottom: 15px;
+  }
+
+  .register form .check-group input{
+    width: auto;
+    margin-bottom :0px;
+    margin-top: 5px;
+  }
+
+  .register form .check-group label{
+    float: none;
+    display: contents;
+    width: auto;
+  }
+
+  .register form button{
+    display: table;
+    margin: 0 auto 30px;
+    background: #71567f;
+    border-color: #71567f;
+    color: #fff;
+    padding: 10px 30px;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+
+  .register .break{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  
+  .register .break::after{
+    content: "";
+    position: relative;
+    width: 40%;
+    height: 2px;
+    background-color: #000;
+    opacity: 0.5;
+  }
+  
+  .register .break::before{
+    content: "";
+    position: relative;
+    width: 40%;
+    height: 2px;
+    background-color: #000;
+    opacity: 0.5;
+  }
+
+  .register .break p{
+    margin: 0px 10px;
+  }
+
+  .register .facebook{
+    text-align: center;
+  }
+
+  .register .facebook .facebook-btn{
+    box-shadow: inset 0 0 0 1px #ced0d2;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .register .facebook .facebook-btn svg{
+    margin-right: 10px;
+  }
+
+  .register .benefit .benefit-title{
+    text-align: center;
+    margin-bottom : 30px;
+    font-size: 24px;
+  }
+
+  .register .benefit{
+    padding: 0 56px;
+  }
+  
+  .register .benefit .benefit-subtitle{
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .register .benefit-list ul{
+    padding-left: 0px;
+    padding-right: 0px;
+    list-style-type: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .register .benefit-list ul li{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+
+  .register .benefit-list ul li .list-icon{
+    width: 100px;
+    margin-right: 36px;
+  }
+
+  .register .benefit-list ul li .list-icon img{
+    float: left;
+    width: 100%;
+    display: block;
+  }
+
+  .register .benefit-list ul li .list-content{
+    width: calc(100% - 136px);
+  }
+
+  .register .benefit-list ul li .list-content h6{
+    font-size: 20px;
+    font-wight: 400;
+  }
+
+  .register .benefit-list ul li .list-content p{
+  margin-bottom: 0px;
+  }
+
+  .register .row .col-md-6:nth-last-child(2){
+    border-right: 1px solid #000;
+  }
+
+  @media only screen and (max-width: 1200px){
+    .register form button{
+       width: 100%;
+      margin-bottom : 15px;
+      line-height: auto;
+      padding: 15px;
+    }
+  }
+
+  @media only screen and (max-width: 991px){
+    .register .benefit, .register form, .register .break, .register .facebook{
+      padding: 0 25px;
+    }
+
+    .register .benefit-list ul li .list-icon{
+      width: 80px;
+      margin-right: 20px;
+    }
+
+    .register .benefit-list ul li .list-content{
+      width: calc(100% - 106px);
+    }
+  }
+
+  @media only screen and (max-width: 767px){
+    section.register .row .col-md-6, section.register .row .col-md-12{
+      -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .register .row .col-md-6:nth-last-child(2){
+      border-width: 0px;
+      border-color: transparent;
+    }
+
+    .register .benefit, .register form, .register .break, .register .facebook{
+      padding: 0px;
+    }
+
+    .register .benefit{
+      display: none;
+    }
+  }
+</style>
+
+
+
+<section class="breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="breadcrumb-list">
+          <li class="breadcrumb_item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb_item">Register</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% section 'register' %}
+
+

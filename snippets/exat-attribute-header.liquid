@@ -1,0 +1,28 @@
+
+{% if template contains 'cart' or template contains 'register' or template contains 'account' %}
+	<script type="text/javascript" src="https://customized-attribute-cdn.pifyapp.com/assets/js/jquery-3.4.1.min.js"></script>
+	{% if template contains 'cart' or template contains 'register' %}
+	<script type="text/javascript" src="https://customized-attribute-cdn.pifyapp.com/assets/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="https://customized-attribute-cdn.pifyapp.com/assets/js/jquery-ui.min.js"></script>
+	<link href="https://customized-attribute-cdn.pifyapp.com/assets/css/jquery-ui.min.css" type="text/css" rel="stylesheet">
+	{% endif %}
+    <script>
+        var pify_shop='{{shop.permanent_domain}}';
+      	var exat_page = '';
+        var pifyJquery= jQuery.noConflict ();
+        {% if template contains 'cart' %}
+            exat_page='cart';
+        {% endif %}
+        {% if template contains 'register' %}
+            exat_page='register';
+        {% endif %}
+        {% if template contains '/account'  %}
+              {% unless template contains '/account/activate' %}
+                  exat_page='account';
+              {% endunless %}
+        {% endif %}
+
+    </script>
+    {{ "exat-attribute.js" | asset_url | script_tag }}
+    {{ "exat-attribute.css" | asset_url | stylesheet_tag }}
+{% endif %}

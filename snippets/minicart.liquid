@@ -1,0 +1,213 @@
+<div class="js-minicart minicart" >
+  <div class="relative" style="height: 100%;">
+    <div class="mini-content ">    
+      <div class="mini-cart-head">
+        <a href="javascript:void(0)" class="mini-cart-undo close-mini-cart">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 298.667 298.667" style="enable-background:new 0 0 298.667 298.667;" xml:space="preserve">
+            <g>
+              <g>
+                <polygon points="298.667,30.187 268.48,0 149.333,119.147 30.187,0 0,30.187 119.147,149.333 0,268.48 30.187,298.667     149.333,179.52 268.48,298.667 298.667,268.48 179.52,149.333   "/>
+              </g>
+            </g>
+
+          </svg>
+        </a>        
+        <h3 class="title">{{ 'minicart.general.title' | t }}</h3>
+        <div class="mini-cart-counter"><span class="cart-counter enj-cartcount">{{cart.item_count }}</span></div>
+      </div>       
+
+      <div class="mini-cart-bottom enj-minicart-ajax">
+        {% if cart.item_count > 0 %}
+        <div class="prod">
+          <div class="product-cart ">
+            {% for item in cart.items %}
+            <ol class="minicart_item list-unstyled mb-0 px-0">
+              <li class="d-flex">
+                <div class="thumb_img_cartmini">
+                  <a href="{{item.url}}" title="" class=""><img alt="{{item.title}}" src="{{ item.image | product_img_url: 'small' }}"></a>
+                </div>
+                <div class="product-detail">
+                  <h3 class="product_name_mini">
+                    <a href="{{item.url}}">{{item.title}}</a>
+                  </h3>
+                  <div class="product_info">
+                    <div class="product_quanity">QTY : {{ item.quantity }} </div>
+                    <div class="product_price">
+                      <span class="price_sale">{{ item.price | money }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="produc_remove">
+                  <a href="javascript:void(0)" class="remove-product" data-line="{{ forloop.index }}"><i class="fa fa-trash-o"></i></a>
+                </div>
+              </li>
+            </ol>
+            {% endfor %}
+          </div>
+
+        {% unless template contains 'index' %}
+        {% if cart.items.size != 0 %}
+                 <div class="alert alert-primary free-shipping-info" role="alert" data-shipping="300.00">
+             <span class="cus-icon"><i class="fa fa-info" aria-hidden="true"></i></span>
+                   {% if cart.total_price > 30000 %}
+                     <p>Congratulations you have unlocked <b>Free Delivery</b> in Dubai</p>
+                      {% endif %}  
+                        {% if cart.total_price < 30000 %}
+                     <div class="progress-line">Add <b>AED </b><span class="pending-amount">{{ 30000 | minus: cart.total_price | money_without_currency }}</span> to get Free Delivery in Dubai</div>
+                      {% endif %}  
+                     <a class="close-alert" href="#"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 298.667 298.667" style="enable-background:new 0 0 298.667 298.667;" xml:space="preserve"> <g> <g> <polygon points="298.667,30.187 268.48,0 149.333,119.147 30.187,0 0,30.187 119.147,149.333 0,268.48 30.187,298.667     149.333,179.52 268.48,298.667 298.667,268.48 179.52,149.333   "></polygon> </g> </g> </svg></a>
+                </div> 
+       {% endif %}
+      {% endunless %}
+
+
+        </div>
+
+
+        
+
+        <div class="sub-total">
+          {% if settings.enable_rtl_mode %}
+          <span class="total-title float-right">{{ 'minicart.general.total_price' | t }}</span>
+          <span class="total-price float-left">{{cart.total_price | money}}</span>
+          {% else %}
+          <span class="total-title float-left">{{ 'minicart.general.total_price' | t }}</span>
+          <span class="total-price float-right">{{cart.total_price | money}}</span>
+          {% endif %}
+        </div>
+        <div class="action-checkout">
+          {% if settings.enable_rtl_mode %}
+          <a href="/checkout" class="button-checkout">
+            <span>{{ 'minicart.general.checkout' | t }}</span>
+          </a>
+          <a href="/cart" class="button-viewcart">
+            <span>{{ 'minicart.general.view_cart' | t }}</span>
+          </a>
+          {% else %}
+          <a href="/cart" class="button-viewcart">
+            <span>{{ 'minicart.general.view_cart' | t }}</span>
+          </a>
+          <a href="/checkout" class="button-checkout" style="display:none;">
+            <span>{{ 'minicart.general.checkout' | t }}</span>
+          </a>
+          {% endif %}
+        </div>      
+        {% else %}
+        <div class="list_product_minicart empty">
+          <div class="empty-product_minicart">
+            <p class="mb-0">{{ 'minicart.general.empty' | t }}</p>
+            <a href="/collections/all" class="to-cart">{{ 'minicart.general.shop_now' | t }}</a>
+          </div>
+        </div>      
+        {% endif %}      
+      </div>    
+    </div>
+  </div>
+</div>
+<div class="js-bg bg-minicart"></div>
+
+<style>
+.alert-primary {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+  width: 100%;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+}
+.js-minicart .alert.alert-primary {
+    position: absolute;
+    bottom: 30px;
+    margin: 0 auto 0;
+    justify-content: center;
+    width: 90%;
+}
+span.cus-icon {
+    background-color: #0063d2;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+.alert.alert-primary .progress-line {
+    width: calc(100% - 40px);
+    margin: 0;
+    text-align: left;
+}
+span.cus-icon i {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 100px;
+    color: #0063d2;
+    line-height: 30px;
+    font-size: 18px;
+  text-align:center;
+}
+    span.pending-amount {
+    font-weight: bold;
+    font-size: 16px;
+}
+.freeship span.cus-icon {
+    background-color: #36b55a;
+}
+    .freeship span.cus-icon i:before {
+    content: '\f00c';
+}
+    .freeship span.cus-icon i {
+    color: #36b55a;
+}
+    .alert-primary p {
+    width: calc(100% - 40px);
+    margin: 0;
+          text-align: left;
+font-size: 16px;
+    font-weight: 500;
+    padding-top: 0;
+}
+    .alert.alert-primary.freeship {
+    background-color: #eaf7ee;
+    border-color: #d0e7d5;
+}
+    a.close-alert {
+    font-size: 14px;
+    position: absolute;
+     right: 8px;
+    top: 4px;
+}
+    a.close-alert svg {
+    width: 12px;
+    height: 12px;
+}
+</style> 
+<!--   <script>
+$(document).ready(function(){
+document.querySelector(".js-minicart .free-shipping-info p").style.display = "none";
+
+var FreeShippingPrice = $('.js-minicart .free-shipping-info').attr('data-shipping');
+var progresstotal = $('.js-minicart .minicart .sub-total .total-price').html().replace(/[^0-9\.]+/g,"");
+var progresstotal = progresstotal.replace("AED", " ");
+var updatedprice = parseInt(FreeShippingPrice) - parseInt(progresstotal);
+
+if ( updatedprice >= 0 && updatedprice <= 300 ){
+  document.querySelector(".js-minicart .progress-line").style.display = "block";
+  $('.js-minicart .pending-amount').text(updatedprice);
+  $('.js-minicart .free-shipping-info').removeClass('freeship');
+}else{
+  document.querySelector(".js-minicart .free-shipping-info p").style.display = "block";
+  $('.js-minicart .free-shipping-info').addClass('freeship');
+  document.querySelector(".js-minicart .progress-line").style.display = "none";
+}       
+});
+
+    $('.js-minicart .free-shipping-info .close-alert').click(function(){
+        $('.alert-primary').remove();
+    });
+
+</script> -->
+
+

@@ -1,0 +1,312 @@
+
+{% style %}
+
+footer{
+	background-color: #71567f;
+	padding:50px 0 0;
+	font-size: 14px;
+}
+
+footer a, footer .footer__links a {
+    color: #fff;
+    opacity: .5;
+    font-size: 13px;
+    text-decoration: none!important;
+    transition: color .2s ease-in;
+}
+
+footer .footer__links{
+	color: #fff;
+	margin-bottom: 30px;
+}
+
+footer .footer__title, .info_footer > ul > li > a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+	opacity: 1;
+
+}
+
+.info_footer ul{
+	padding-left: 0px;
+	list-style-type: none;
+	margin-bottom: 30px;
+	
+}
+
+footer .list-inline{
+	max-width: 300px;
+}
+
+footer .list-inline > li{
+	display: inline-block;
+	    margin-right: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+}
+
+/* footer .list-inline > li img{
+	height: 30px;
+} */
+
+footer .secured-site{
+	color: #fff;
+	margin-bottom: 30px;
+}
+
+footer .footer__icon, footer .footer__icon{
+	width: 120px;
+}
+
+footer .footer__icon img{
+	width: 100%;
+}
+
+
+footer .footer__copyright, footer .footer__copyright {
+    background-color: rgba(0,0,0,.2);
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    color: #fff;
+}
+
+footer .footer__copyright p, footer .footer__copyright p{
+	margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 992px){
+	footer .one-fifth{
+	width: 33.33%
+}
+
+footer .two-fifths{
+	width: 100%;
+}
+
+footer .col-xs-6 {
+	width: 50%;
+	-ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+footer .container > .row{
+ 	margin-left: 0px;
+    margin-right: 0px;
+                        }
+}
+@media only screen and (max-width: 568px){
+	
+
+footer .two-fifths{
+	width: 100%;
+}
+
+footer .col-xs-6 {
+	width: 100%;
+	-ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+}
+
+{% endstyle %}
+
+{% if section.settings.select_fts == "footer_v7" %}
+{% if template contains 'index' %}
+<footer class="footer_v7" style="background-color : {{section.settings.ft_home_bg_footer}}">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% if block.type == 'link' %}
+      <div class="one-fifth medium-down--one-third">
+        <div class="info_footer">
+          
+          {% assign link_footer = block.settings.link_lists_menu %}
+          
+          <ul class="list-unstyled footer__links mb-0">
+            {% for link in link_footer.links %}
+            <li><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+            {% if link !=blank %}
+              <ul>
+                {% for sublink in link.links %}
+                <li><a href="{{ sublink.url }}" title="{{ sublink.title }}">{{ sublink.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% endfor %}
+          </ul>        
+        </div>
+      </div>
+      {% endif %}
+      
+       {% if block.type == 'follow' %}
+        <div class="two-fifths medium-down--one-third">
+          <div class="info_footer">
+            <div class="row">
+              <div class="col-xs-6 col-md-12">
+                <h5 class="footer__title">{{ block.settings.heading | escape }}</h5>
+                <ul class="d-footer__credit-cards list-inline">
+
+                  
+
+                 
+                  <li>
+                  
+                    <img alt="{{ img.alt }}" src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Untitled-1.png?v=1665832393">
+                   
+                  </li>
+                  
+                </ul>
+
+                <div class="secured-site">
+                  <i class="icon ion-ios-locked"></i>{{ block.settings.icon_text }}
+                </div>
+              </div>
+              <div class="col-xs-6 col-md-12">
+                <div class="footer__title d-footer__title--contact-us">{{ block.settings.contact_text | escape }}</div>
+                {{ block.settings.contact_info }}
+                <ul class="d-footer__social-links list-inline">
+                  <li><a href="https://www.facebook.com/800flower" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="https://instagram.com/800flower.ae" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="https://wa.me/971-56-4334667" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+                </ul>
+              </div>
+              <div class="col-xs-6 col-md-12">
+                <h5 class="footer__title">{{ settings.heading | escape }}</h5>
+                <div class="footer__icon">
+                  {% if settings.image_7 !=blank %}
+                  <a href="{{ settings.image_link.url }}"><img src="{{ settings.image_7 | img_url:'small'}}"></a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>     
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="footer__copyright">
+    <p>©{{ settings.copy_right }}</p>
+  </div>
+</footer>
+<style>
+  .footer_v7 .top-footer .title_footer h4{
+    color : {{section.settings.ft_home_color_text}};
+  }
+  .footer_v4 .top-footer .info_footer ul li a{
+    color : {{section.settings.ft_home_color_text}};
+  }
+  .footer_v4 .top-footer .content_footer{
+    color : {{section.settings.ft_home_color_text}};
+  }
+</style>
+
+{% endif %}
+{% endif %}
+
+{% if section.settings.select_fts_all == "footer_ver7" %}
+{% unless template contains 'index' %}
+<footer class="footer_v7" style="background-color : {{section.settings.ft_home_bg_footer}}">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% if block.type == 'link' %}
+      <div class="one-fifth medium-down--one-third">
+        <div class="info_footer">
+          {% assign link_footer = block.settings.link_lists_menu %}
+          <ul class="list-unstyled footer__links mb-0">
+            {% for link in link_footer.links %}
+              <li>
+                <a href="{{ link.url }}" title="{{ link.title }}">
+                  <h5 class="footer__title">{{ link.title }}</h5>
+                </a>
+              </li>
+            {% if link.title !=blank %}
+              <ul>
+                {% for sublink in link.links %}
+                  <li>
+                    <a href="{{ sublink.url }}" title="{{ sublink.title }}">
+                      {{ sublink.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% endfor %}
+          </ul>        
+        </div>
+      </div>
+      {% endif %}
+
+      {% if block.type == 'follow' %}
+      <div class="two-fifths medium-down--one-third">
+        <div class="info_footer">
+          <div class="row">
+            <div class="col-xs-6 col-md-12">
+              <h5 class="footer__title">{{ block.settings.heading | escape }}</h5>
+              <ul class="d-footer__credit-cards list-inline">
+
+                {% for i in (1..7) %}
+
+                {% capture image %}image_{{ i }}{% endcapture %}
+                {% assign img = block.settings[image] %}
+                <li>
+                  {% if img !=blank %}
+                  <img alt="{{ img.alt }}" src="{{ img | img_url:'small'}}">
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+
+              <div class="secured-site">
+                <i class="icon ion-ios-locked"></i>{{ block.settings.icon_text }}
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-12">
+              <div class="footer__title d-footer__title--contact-us">{{ block.settings.contact_text | escape }}</div>
+              {{ block.settings.contact_info }}
+              <ul class="d-footer__social-links list-inline">
+                <li><a href="https://www.facebook.com/800flower" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://instagram.com/800flower.ae" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://wa.me/971-56-4334667" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6 col-md-12">
+              <h5 class="footer__title">{{ settings.heading | escape }}</h5>
+              <div class="footer__icon">
+                {% if settings.image_7 !=blank %}
+                <a href="{{ settings.image_link.url }}"><img src="{{ settings.image_7 | img_url:'small'}}"></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>     
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="footer__copyright">
+    <p>©{{ settings.copy_right }}</p>
+  </div>
+</footer>
+<style>
+  .footer_v4 .top-footer .title_footer h4{
+    color : {{section.settings.ft_other_color_text}};
+  }
+  .footer_v4 .top-footer .info_footer ul li a{
+    color : {{section.settings.ft_other_color_text}};
+  }
+  .footer_v4 .top-footer .content_footer{
+    color : {{section.settings.ft_other_color_text}};
+  }
+</style>
+{% endunless %}
+{% endif %}

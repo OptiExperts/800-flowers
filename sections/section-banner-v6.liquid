@@ -1,0 +1,177 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v6 {% if section.settings.ena_margin_top %}  mt-all {% endif %}" style="background-image: url({% if section.settings.img_banner != blank %}{{section.settings.img_banner | img_url: 'master'}} {% else %} //via.placeholder.com/1920x700 {% endif %})">  
+    <div class=" lazyloaded">
+      <div class=" container container-v2" >
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 order-2 order-md-1">
+            <div class="box-video">
+             <a data-fancybox href="{{section.settings.url_btn}}">
+              {% if section.settings.img_banner1 != blank %}
+              <img src="{{section.settings.img_banner1 | img_url:'master'}}" class="img-fluid">
+              {% else %}
+              <img src="//via.placeholder.com/690x483" class="img-fluid" alt="banner">
+              {% endif %}
+               <i class="fa fa-play"></i>
+            </a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 order-1 order-md-2">
+            <div class="box-info">
+              <div class="content-banner">
+              	{% if section.settings.title_big != blank %}
+                <h3 class="title" style="color:{{section.settings.color_title}}">{{section.settings.title_big}}</h3>
+                {% endif %}
+                {% if section.settings.title_banner != blank %}
+                <p class="title" style="color:{{section.settings.color_title}}">{{section.settings.title_banner}}</p>
+                {% endif %}
+                {% if section.settings.btn_banner != blank %}
+                <a href="{{section.settings.url_btn}}" class="btn-banner btn-banner-{{ section.id }}">{{section.settings.btn_banner}}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .section-banner-v6 .box-info .content-banner .btn-banner-{{ section.id }} {
+    color: {{section.settings.color_btn}};
+    background: {{section.settings.bg_btn}};
+    transition: all .3s;
+  }
+  .section-banner-v6 .box-info .content-banner .btn-banner-{{ section.id }}:hover {
+    color: {{section.settings.color_btn_hover}};
+    background: {{section.settings.bg_btn_hover}};
+  }
+  .section-banner-v6 .banner-box .banner-info {
+    background: {{section.settings.bg_info}};
+  }
+  .section-banner-v6 .banner-box .banner-info .title {
+    background: {{section.settings.bg_info}};
+  }
+</style>
+{% schema %}
+{
+  "name": "BANNER V6",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "ena_margin_top",
+      "label": "Enable Add Margin Top",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_section",
+      "label": "Baxckground section",
+      "default": "#f4f4f4"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Backgroud Image",
+      "info": "1920x900px recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": "Image Video",
+      "info": "690 x 483px recommended"
+    },
+    {
+      "type": "url",
+      "id": "url_btn",
+      "label": "URL banner",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "title_big",
+      "label": "Title big",
+      "default": "Design to Tranform"
+    },
+    {
+      "type": "text",
+      "id": "title_banner",
+      "label": "Title banner",
+      "default": "Design to Tranform"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_info",
+      "label": "Background Info",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "btn_banner",
+      "label": "Button banner",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color Button",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn",
+      "label": "Background Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_btn_hover",
+      "label": "Color Button hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn_hover",
+      "label": "Background Button Hover",
+      "default": "#fe7250"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V6",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

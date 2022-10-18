@@ -1,0 +1,905 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+For info on test orders:
+- General http://docs.shopify.com/manual/your-store/orders/test-orders
+- Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+<div class="wrap-bread-crumb breadcrumb_cart">  
+<div class="container container-v1" >
+{% include 'breadcrumb' %}  
+</div>
+</div>
+<section class="page-cart">
+<div class="content-pages">
+<div class="container container-v1">
+<div class="content-about content-cart-page">
+  {% if cart.item_count > 0 %}
+  <form action="/cart" method="post">
+
+    <div class="row">         
+
+      <div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+
+             {% if cart.items.size != 0 %}
+                <div class="alert alert-primary free-shipping-info cart-ship-info" role="alert" data-shipping="300.00">
+             <span class="cus-icon"><i class="fa fa-info" aria-hidden="true"></i></span>
+                     <p>Congratulations you have unlocked <b>Free Delivery</b> in Dubai</p>
+                        {% if cart.total_price < 30000 %}
+                     <div class="progress-line price-update">Add <b>AED </b><span class="pending-amount">{{ 30000 | minus: cart.total_price | money_without_currency }}</span> to get Free Delivery in Dubai</div>
+                      {% endif %}  
+                     <a class="close-alert" href="#"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 298.667 298.667" style="enable-background:new 0 0 298.667 298.667;" xml:space="preserve"> <g> <g> <polygon points="298.667,30.187 268.48,0 149.333,119.147 30.187,0 0,30.187 119.147,149.333 0,268.48 30.187,298.667     149.333,179.52 268.48,298.667 298.667,268.48 179.52,149.333   "></polygon> </g> </g> </svg></a>
+                </div>
+                {% endif %}
+
+    
+    <div class="hide-on-mob">
+    <div class="dekstop-cart"><h2>WITH THIS PRODUCTS ALSO BUY:</h2></div>
+    {% render 'cart-upsell-desktop' %}
+
+    </div>
+    <h2 class="dekstop-title">ITEMS IN CART</h2>
+        <table class="shop_table table--responsive cart table dekstop-cart">
+        
+          <thead>
+            <tr class="cart-title">
+
+              <th colspan="2" class="product-thumbnail"> {{ 'cart.label.product' | t }}</th>
+              <th class="product-price">{{ 'cart.label.price' | t }}</th>
+              <th class="product-quantity">{{ 'cart.label.quantity' | t }}</th>
+              <th class="product-subtotal">{{ 'cart.label.total' | t }}</th>
+              <th class="product-remove">&nbsp;</th>
+            </tr>
+          </thead>
+          {% if cart.item_count > 0 %}
+          <form action="/cart" method="post">
+            <tbody>
+              {% for item in cart.items %}
+              <tr class="cart_item  row_{{ item.id }}">
+                <td data-label="Product Name" class="product-thumbnail">
+                  <a href="{{ item.url }}"><img  src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}"/></a>           
+                </td>
+                <td class="product-name-thumb" data-title="Product">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a> 
+                  {% unless item.variant.title contains 'Default' %}
+                  <small style="display: block; color: #959595;">{{ item.variant.title }}</small>
+                  {% endunless %}
+                  {% if settings.cart_vendor_enable %}
+                  <p>{{ item.vendor }}</p>
+                  {% endif %}           
+
+                </td>
+                <td data-label="Product Price" class="product-price" data-title="Price">
+                  <span class="amount">{{ item.price | money }}</span>          
+                </td>
+                <td data-label="Quantity" class="product-quantity" data-title="Quantity">
+<!--                   <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0"> -->
+                <div class="cus-quantity">
+                <div class="js-qty cu-qty">
+                  <button type="button" data-minplus="{{item.key}}" class="qtyminus qty_minus  icon-fallback-text" data-id="" data-qty="0">
+                    <span class="fa fa-caret-down"></span>
+                  </button>
+                  <input type="text" class="js-qty__num" data-qty-cart-update="{{ item.id }}" data-val-qty="{{item.key}}" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="1"  pattern="[0-9]*" name="updates[]" id="updates_39814257737815">
+                  <button type="button" data-minplus="{{item.key}}" class="qtyplus qty_plus icon-fallback-text" data-id="" data-qty="11">
+                    <span class="fa fa-caret-up"></span>
+                  </button>
+                </div>
+              </div>
+                </td>
+                <td data-label="Sub Total" class="product-subtotal" data-title="Total">
+                  <span class="amount">{{ item.line_price | money }}</span> 
+                </td>
+                <td  class="product-remove">
+                  <a class="remove set-12-svg" href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 298.667 298.667" style="enable-background:new 0 0 298.667 298.667;" xml:space="preserve"> <g> <g> <polygon points="298.667,30.187 268.48,0 149.333,119.147 30.187,0 0,30.187 119.147,149.333 0,268.48 30.187,298.667     149.333,179.52 268.48,298.667 298.667,268.48 179.52,149.333   "></polygon> </g> </g> </svg></a>
+                </td>
+              </tr>
+              {% endfor %}            
+
+            </tbody>
+          </form>
+          {% endif %}
+        </table>
+
+        {% if cart.item_count > 0 %}
+        <div class="cart-detail">
+          {% render 'cart-upsell' %}
+          <h2 class="mobile-title">ITEMS IN CART</h2>
+          <div class="refresh-cart">
+            {% for item in cart.items %}
+     
+        <div class="cart-mobile row_{{ item.id }}" data-cart-item-key="row_{{ item.id }}">
+            <div class="cart-image">
+              <a href="{{ item.url }}"><img  src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}"/></a>  
+            </div>
+          <div class="cart-content">
+            <div class="cart-title">
+              <a href="{{ item.url }}">{{ item.product.title }}</a> 
+              {% unless item.variant.title contains 'Default' %}
+                  <small style="display: block; color: #959595;">{{ item.variant.title }}</small>
+                  {% endunless %}
+                  {% if settings.cart_vendor_enable %}
+                  <p>{{ item.vendor }}</p>
+                  {% endif %} 
+              <span class="amount">{{ item.price | money }}</span>          
+              <div class="cus-quantity">
+                <div class="js-qty cu-qty">
+                  <button type="button" data-minplus="{{item.key}}" class="qtyminus qty_minus  icon-fallback-text" data-id="" data-qty="0">
+                    <span class="fa fa-minus"></span>
+                  </button>
+                  <input type="text" class="js-qty__num" data-qty-cart-update="{{ item.id }}" data-val-qty="{{item.key}}" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="1"  pattern="[0-9]*" name="updates[]" id="updates_39814257737815">
+                  <button type="button" data-minplus="{{item.key}}" class="qtyplus qty_plus icon-fallback-text" data-id="" data-qty="11">
+                    <span class="fa fa-plus"></span>
+                  </button>
+                </div>
+                <a class="remove set-12-svg" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                  <sapn class="fa fa-trash-o"></sapn>
+                </a>
+              </div>
+            </div>
+          </div>
+              
+        </div>
+    
+          
+{% endfor %}     
+           </div>
+        </div>
+          <div class="mob-grand-total">
+                  <strong>Grand Total Incl. Tax</strong><div class="cart-amount"><span><strong><span class="amount">{{ cart.total_price | money }}</span></strong> </span></div>
+              </div>
+   {% endif %}
+
+          
+      </div>
+
+      <div class="row custom-cart-cls">
+        <div class="col-md-4 col-12">
+          <div class="identixweb-order-delivery"></div> 
+        </div>            
+
+        <div class="col-md-4 col-12">
+          <div class="cart-widget-wrapper">
+            <div class="cart-totals cus-cart"> 
+              <p for="CartSpecialRequest" class="cart-note__label small--text-center">Send as Anonymous?</p> 
+              <p>
+                <label><input type="radio" class="anonymous" {% if cart.attributes["Send as Anonymous?"] == "Yes" %} checked{% endif %} name="anonymous" value="No">No</label>
+                <label><input type="radio" class="anonymous" {% if cart.attributes["Send as Anonymous?"] == "No" %} checked{% endif %} name="anonymous" value="Yes">Yes</label>
+              </p> 
+              <span>*We will not share your information with anyone if you choose yes.</span>
+            </div>
+          </div>
+          <div class="cart-attribute__field cus-gif">
+            <p class="cart-attribute__field__giftmssg"> 
+              <label for="gift-message">Greeting Card Message</label>
+            <textarea name="note" class="required form-control" placeholder="Your Personalized Card Message" id="CartNote" required>{{ cart.note }}</textarea>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="final-cart">
+            <p class="cart-attribute__field">
+              <label>Occassion</label>
+              <select id="occassion" name="attributes[Occassion]">
+                <option value="">Select Occassion</option>
+                <option value="Birthday"{% if cart.attributes["Occassion"] == "Birthday" %} selected{% endif %}>Birthday</option>
+                <option value="Love"{% if cart.attributes["Occassion"] == "Love" %} selected{% endif %}>Love</option>
+                <option value="Corporate"{% if cart.attributes["Occassion"] == "Corporate" %} selected{% endif %}>Corporate</option>
+                <option value="Congratulation"{% if cart.attributes["Occassion"] == "Congratulation" %} selected{% endif %}>Congratulation</option>
+                <option value="New Baby"{% if cart.attributes["Occassion"] == "New Baby" %} selected{% endif %}>New Baby</option>
+                <option value="Sympathy"{% if cart.attributes["Occassion"] == "Sympathy" %} selected{% endif %}>Sympathy</option>
+                <option value="Anniversary"{% if cart.attributes["Occassion"] == "Anniversary" %} selected{% endif %}>Anniversary</option>
+              </select>
+            </p>
+            <div class="cart-widget-wrapper">
+              <div class="cart-totals text-left px-2 new-field">
+                <p class="cart-attribute__field">
+                  <label>Location Type</label>
+                  <select id="location-type" name="attributes[Location Type]">
+                    <option value="">Select Location</option>
+                    <option value="Office"{% if cart.attributes["Location Type"] == "Office" %} selected{% endif %}>Office</option>
+                    <option value="School"{% if cart.attributes["Location Type"] == "School" %} selected{% endif %}>School</option>
+                    <option value="Home"{% if cart.attributes["Location Type"] == "Home" %} selected{% endif %}>Home</option>
+                    <option value="Hospital"{% if cart.attributes["Location Type"] == "Hospital" %} selected{% endif %}>Hospital</option>
+                    <option value="Hotel"{% if cart.attributes["Location Type"] == "Hotel" %} selected{% endif %}>Hotel</option>
+                  </select>
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="cart_totals ">
+            <div class="cart-check">
+              <h2 class="cart-title">{{'cart.label.cart_total' | t}}</h2>
+              <table class="total-checkout">
+                <tbody>
+                  <tr>
+                    <th class="cart-label"><span >{{ 'cart.label.total' | t }}</span></th>
+                    <td class="cart-amount"><span ><strong><span class="amount">{{ cart.total_price | money }}</span></strong> </span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="wc-proceed-to-checkout clearfix">
+                <a class="checkout-button button alt wc-forward bg-color" href="/checkout">{{ 'cart.general.checkout' | t }}</a>
+              </div>
+            </div>  
+          <div class="pay-img">
+    <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Payment_methods.png?v=1658821555" class="first">
+    <img src="https://cdn.shopify.com/s/files/1/0561/8384/9047/files/Full-Security_jpg.png?v=1658821566">
+    </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-12"></div>
+        <div class="col-md-4 col-12">
+
+
+        </div>
+      </div>
+
+      </form>
+    {% else %}
+    {% comment %}
+    The cart is empty
+    {% endcomment %}
+    <p>{{ 'cart.general.empty' | t }}</p>
+    <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+    {% endif %}
+    </div>  
+</div>
+</div>
+<!-- End Content Pages -->
+</section>
+<style>
+  .freeship .progress-line.price-update {
+    display: none !important;
+}
+.alert-primary {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+  width: 100%;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+}
+.custom-progress {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.custom-progress progress.cust-progress {
+  background: #00aa5b;
+}
+
+.pay-img {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.pay-img img {
+  width: 50%;
+}
+
+.page-cart{
+      padding: 20px 0 15px;
+}
+
+  .dekstop-cart h2 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+        margin: 20px 0px;
+}
+  .pay-img {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+  .pay-img img {
+    width: 50%;
+}
+
+  .page-cart{
+        padding: 20px 0 15px;
+  }
+  
+.content-about.content-cart-page .row {
+flex-wrap:wrap;
+align-items: unset;
+}
+.page-cart .content-cart-page .cart_totals .cart-check {
+padding: 10px 20px 40px;
+margin: 0px 0;
+}
+.page-cart .content-cart-page .cart_totals .cart-check .checkout-button{
+padding: 18px 40px !important;
+}
+.final-cart .cart-attribute__field {
+max-width: 380px;
+margin: auto;
+}
+.row.custom-cart-cls {
+padding: 50px 0px;
+}
+.new-field select {
+width: 100%;
+}
+.cart-attribute__field {
+max-width: 49%;
+margin: 0;
+width: 49%;
+}
+.final-cart {
+display: flex;
+justify-content: space-between;
+background-color: #f7f7f7;
+padding: 30px 20px;
+border-radius: 20px;
+margin-bottom:25px;
+}
+.new-field p.cart-attribute__field {
+max-width: 100%;
+margin: 0;
+width: 100%;
+}
+.new-field select#location-type {
+width: 72%;
+margin: 0 auto;
+display: block;
+}
+.cart-attribute__field.cus-gif {
+background-color: #f7f7f7;
+max-width: 100%;
+margin: 0;
+width: 100%;
+padding: 20px;
+border-radius: 20px;
+}
+.final-cart p.cart-attribute__field {
+max-width: 49% !important;
+width: 49% !important;
+}
+.final-cart .cart-widget-wrapper{
+max-width: 49%;
+width: 49%;
+}
+.cart-totals.text-left.px-2.new-field p.cart-attribute__field {
+max-width: 100% !important;
+width: 100% !important;
+}
+.final-cart p.cart-attribute__field select {
+width: 100%;
+}
+.new-field select#location-type {
+width: 100%;
+}
+.cart-widget-wrapper .cus-cart {
+background-color: #f7f7f7;
+padding: 30px 20px;
+border-radius: 20px;
+margin-bottom: 25px;
+}
+
+.slick-slide{
+  dispaly: none;
+}
+  h2.dekstop-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+@media (max-width:767px){
+  h2.dekstop-title{
+    display:none;
+  }
+.content-about.content-cart-page .row{
+  flex-wrap:wrap;
+}
+.table-responsive .cart-update{
+  display:block !important;
+  margin: 20px 0px 20px 0 !important;
+}
+.table-responsive .continue-shopping-1 {
+  display:block !important;
+  margin-bottom: 30px !important; 
+}
+.cart_totals.mob-btn .cart-update input.button.bg-color {
+  width: 100%;
+}
+.table-responsive .continue-shopping-1 a {
+  padding: 18px 20px !important;
+  width: 100%;
+}
+.cart_totals.mob-btn .cart-update input.button.bg-color {
+  width: 100%;
+  padding: 18px 20px !important;
+}
+.final-cart {
+  margin-top: 30px;
+}
+}
+
+
+  textarea#attribute_2173 {
+    width: 100%;
+}
+</style>
+
+
+<script>
+
+$(document).ready(function (cart) {
+$('#shipping-instructions').on('blur', function () {
+  $.post('/cart.js', {
+    attributes: {
+      'Shipping Instructions': $(this).val()
+    }
+  }).done(function () {
+    ShopifyAPI.onCartUpdate(cart);
+    console.log(cart);
+  });
+});
+$('#CartNote').on('blur', function () {
+  var greeting = $(this).val();
+
+      $.post('/cart.js', {
+      attributes: {
+        'Greeting Card Message': greeting
+      }
+    }).done(function () {
+      ShopifyAPI.onCartUpdate(cart);
+    });
+  
+  ShopifyAPI.updateCartNote = function(note, callback) {
+  var params = {
+    type: 'POST',
+    url: '/cart/update.js',
+    data: 'note=' + attributeToString(note),
+    dataType: 'json',
+    success: function(cart) {
+      if ((typeof callback) === 'function') {
+        callback(cart);
+      }
+      else {
+        ShopifyAPI.onCartUpdate(cart);
+      }
+    },
+    error: function(XMLHttpRequest, textStatus) {
+      ShopifyAPI.onError(XMLHttpRequest, textStatus);
+    }
+  };
+  jQuery.ajax(params);
+};
+});
+$(document).ready(function(){
+  $(".anonymous").click(function(){
+    var radioValue = $("input[name='anonymous']:checked").val();
+    $.post('/cart.js', {
+      attributes: {
+        'Send as Anonymous?': radioValue
+      }
+    }).done(function () {
+      ShopifyAPI.onCartUpdate(cart);
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#location-type").click(function(){
+    $(this).attr('checked');
+    var locationValue =  $(this).val();
+    $.post('/cart.js', {
+      attributes: {
+        'Location Type': locationValue
+      }
+    }).done(function () {
+      ShopifyAPI.onCartUpdate(cart);
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#occassion").click(function(){
+    $(this).attr('checked');
+    var locationValue =  $(this).val();
+    $.post('/cart.js', {
+      attributes: {
+        'Occassion': locationValue
+      }
+    }).done(function () {
+      ShopifyAPI.onCartUpdate(cart);
+    });
+  });
+});
+
+});
+
+
+
+  
+</script>
+
+    <script>
+
+$(document).ready(function(){
+document.querySelector(".cart-ship-info p").style.display = "none";
+
+var FreeShippingPrice = $('.cart-ship-info').attr('data-shipping');
+var progresstotal = $('.total-checkout .cart-amount .amount').html();
+var progresstotal = progresstotal.replace("AED", " ");
+var updatedprice = parseInt(FreeShippingPrice) - parseInt(progresstotal);
+
+
+if ( updatedprice >= 0 && updatedprice <= 300 ){
+  document.querySelector(".price-update").style.display = "block";
+  $('.pending-amount').text(updatedprice);
+  $('.cart-ship-info').removeClass('freeship');
+}else{
+  document.querySelector(".cart-ship-info p").style.display = "block";
+  $('.cart-ship-info').addClass('freeship');
+  document.querySelector(".price-update").style.display = "none";
+}       
+    
+
+
+});
+
+
+  $('body').on('click', '.qtyplus', function(e) {
+    var input_val_key = $(this).attr('data-minplus');
+    var currentVal = parseInt( $("[data-val-qty='"+input_val_key+"']").val() );
+    if (!isNaN(currentVal)) {
+      $("[data-val-qty='"+input_val_key+"']").val(currentVal + 1);
+    } else {
+      $("[data-val-qty='"+input_val_key+"']").val(0);
+    }
+    e.preventDefault();
+
+    var cus_done = "";
+    jQuery("input[data-qty-cart-update]").each(function(){
+      cus_done += "updates[" + $(this).attr('data-qty-cart-update') + "]=" + $(this).val() + "&";
+
+    });
+
+    $.ajax({
+      type: 'POST',
+      url: '/cart/update.js',
+      data: cus_done,
+      dataType: 'json',
+      success: function(data) {
+        
+        if(data){
+          
+          $.each(data.items, function( key, value ){
+var FreeShippingPrice = $('.cart-ship-info').attr('data-shipping');
+        var progresstotal = Shopify.formatMoney(data.original_total_price).replace(/[^0-9\.]+/g,"");
+        var updatedprice = parseInt(FreeShippingPrice) - parseInt(progresstotal);
+
+        if ( updatedprice >= 0 && updatedprice <= 300 ){
+          document.querySelector(".price-update").style.display = "block";
+          $('.pending-amount').text(updatedprice);
+          $('.cart-ship-info').removeClass('freeship');
+        }else{
+          document.querySelector(".cart-ship-info p").style.display = "block";
+          $('.cart-ship-info').addClass('freeship');
+          document.querySelector(".price-update").style.display = "none";
+        }
+          var main_string_price = data.items[key].final_price;
+          var main_sting_final_line_price = data.items[key].final_line_price;
+          var Currency = data.currency;
+          var price = Shopify.formatMoney(main_sting_final_line_price).replace("$", "AED ");
+           var test = $(".row_"+data.items[key].id  +" .amount").html(price);
+            var subTotal = Shopify.formatMoney(data.total_price).replace("$", "AED ");
+            $('.cart-amount .amount').html(subTotal);
+          });
+
+        }
+      },
+    });
+    return false;
+
+  });
+
+  $('body').on('click', '.qtyminus', function(e) {
+    var input_val_key = $(this).attr('data-minplus');
+    var currentVal = parseInt( $("[data-val-qty='"+input_val_key+"']").val() );
+    if (!isNaN(currentVal) && currentVal > 1   ) {
+      $("[data-val-qty='"+input_val_key+"']").val(currentVal - 1);
+    } else {
+      $("[data-val-qty='"+input_val_key+"']").val(1);
+    }
+    e.preventDefault();
+
+    var cus_done = "";
+    jQuery("input[data-qty-cart-update]").each(function(){
+      cus_done += "updates[" + $(this).attr('data-qty-cart-update') + "]=" + $(this).val() + "&";
+    });
+
+    $.ajax({
+      type: 'POST',
+      url: '/cart/update.js',
+      data: cus_done,
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        if(data){
+          $.each(data.items, function( key, value ){
+ var FreeShippingPrice_1 = $('.cart-ship-info').attr('data-shipping');
+        var progresstotal_1 = Shopify.formatMoney(data.original_total_price).replace(/[^0-9\.]+/g,"");
+        var updatedprice_1 = parseInt(FreeShippingPrice_1) - parseInt(progresstotal_1);
+
+         if ( updatedprice_1 >= 0 && updatedprice_1 <= 300 ){
+          document.querySelector(".price-update").style.display = "block";
+          $('.pending-amount').text(updatedprice_1);
+           document.querySelector(".cart-ship-info p").style.display = "none";
+           $('.cart-ship-info').removeClass('freeship');
+        }else{
+          document.querySelector(".cart-ship-info p").style.display = "block";
+          $('.cart-ship-info').addClass('freeship');
+          document.querySelector(".price-update").style.display = "none";
+        }
+          var main_string_price = data.items[key].final_price;
+          var main_sting_final_line_price = data.items[key].final_line_price;
+          var price = Shopify.formatMoney(main_sting_final_line_price).replace("$", "AED ");
+           var test = $(".row_"+data.items[key].id  +" .amount").html(price);
+            var subTotal = Shopify.formatMoney(data.total_price).replace("$", "AED ");
+            $('.cart-amount .amount').html(subTotal);
+          });
+
+        }
+      },
+
+    });
+    return false;
+  });
+
+  $(document).ready(function(){
+    setTimeout(function() {
+      $('.hide-on-mob').css("visibility" , "visible");
+      }, 3000);
+  });
+</script>
+    <style>
+span.cus-icon {
+    background-color: #0063d2;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+span.cus-icon i {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 100px;
+    color: #0063d2;
+    line-height: 30px;
+    font-size: 18px;
+  text-align:center;
+}
+    span.pending-amount {
+    font-weight: bold;
+    font-size: 16px;
+}
+.freeship span.cus-icon {
+    background-color: #36b55a;
+}
+    .freeship span.cus-icon i:before {
+    content: '\f00c';
+}
+    .freeship span.cus-icon i {
+    color: #36b55a;
+}
+    .alert-primary p {
+    width: calc(100% - 40px);
+    margin: 0;
+          text-align: left;
+}
+    .alert.alert-primary.freeship {
+    background-color: #eaf7ee;
+    border-color: #d0e7d5;
+}
+ a.close-alert {
+    font-size: 14px;
+    position: absolute;
+    right: 20px;
+}
+    a.close-alert svg {
+    width: 12px;
+    height: 12px;
+}
+      .hide-on-mob {visibility:hidden;}
+  @media (max-width:767px){
+    .page-cart .next-slide, .page-cart .prev-slide {
+      background: #fff;
+      z-index: 1;
+      color: #000000;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 700;
+      position: absolute;
+      transition: .3s;
+      box-shadow: 1px 2px 6px 4px rgb(53 57 68 / 8%);
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .page-cart .prev-slide{
+      left:0;
+    }
+    .page-cart .next-slide{
+      right:0;
+    }
+  }
+</style>
+<style>
+  @media (max-width:767px){
+    .hide-on-mob {
+      display:none;
+    }
+    .dekstop-cart {
+      display: none;
+    }
+    .cart-mobile {
+      display: flex;
+      margin-bottom:15px;
+	}
+   .cart-mobile .cart-content {
+      margin-left: 15px;
+      width: 75%;
+	}	
+    .cart-mobile .cu-qty {
+    	float: none !important;
+      display: flex;
+	}
+    .cus-quantity {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cus-quantity .qty_minus {
+      border: 1px solid #ddd;
+      position: static;
+      border-radius: 0;
+      border-right: transparent;
+      width: 30%;
+      height: 32px;
+	}
+    .cus-quantity .qty_plus {
+      width: 30%;
+      position: static;
+      border: 1px solid #ddd;
+      position: static;
+      border-radius: 0;
+      border-left: transparent;
+      height: 32px;
+	}
+    .cart-mobile input{
+      padding: 0;
+      width: 40%;
+      text-align: center;
+      border-right: transparent;
+      height: 32px;
+      border-left: transparent;
+    }
+    .qty_minus span, .qty_plus span{
+      color: #8f58a3;
+      font-size: 11px;
+    }
+    .mob-hide .cart-update {
+    display: none !important;
+}
+    .cart-detail .cart-mobile {
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+    .table-responsive .continue-shopping-1 a {
+    padding: 10px 20px !important;
+     
+}
+    .page-cart {
+    padding: 0;
+}
+    .content-about.content-cart-page .row {
+
+    padding-top: 10px;
+}
+    .mob-grand-total {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+    .mob-grand-total strong{
+      font-weight:900;
+    }
+    .mob-grand-total .cart-amount {
+    margin-left: 30px;
+}
+    .cart_totals.mob-btn.mob-hide {
+    display: none;
+}
+    .also_like_prod .title {
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+    h4.des-font.capital.title-product.mb-0 {
+    height: 70px !important;
+}
+    .fa-minus:before {
+    content: "\f068";
+    color: #b1b1b1 !important;
+}
+    h2.mobile-title {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+    margin: 25px 0 30px;
+    text-transform: uppercase;
+}
+    .page-cart .also_like_prod .title {
+    margin: 20px 0 10px;
+}
+    .cart-title a {
+    height: 50px;
+    display: block;
+}
+a.close-alert {
+    right: 5px;
+    top: -1px;
+}
+  }
+
+  @media (min-width:767px){
+  .mob-grand-total {
+    display: none;
+}
+    .cart-detail .also_like_prod {
+    display: none !important;
+}
+    h2.mobile-title {
+    display: none;
+}
+    
+  }
+
+  p.exat-attribute.cart-attribute__field {
+    width: 100%;
+    max-width: 100%;
+}
+</style>
+  <script>
+    (function ($) {
+    $('.close-alert').click(function(){
+        $('.alert-primary').remove();
+    });
+})(jQuery);
+</script>
+{% schema %}
+{
+"name": "Cart Page",
+"settings": [
+
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

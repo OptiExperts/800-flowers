@@ -1,0 +1,26 @@
+{% comment %} you can always turn off the speedupkernel {% endcomment %}
+{%- assign speedupkernel = true -%}
+{%- assign is_admin_interface = true -%}
+
+
+	{%- if request.host contains 'myshopify.com' -%}
+		{%- assign is_admin_interface = true -%}
+	{%- else -%}
+		{%- assign is_admin_interface = false -%}
+	{%- endif -%}
+
+	{%- if request.host contains 'shopifypreview.com' -%}
+		{%- assign is_admin_interface = true -%}
+	{%- endif -%}
+
+	{%- if request.host contains 'gempages.net' -%}
+		{%- assign is_admin_interface = true -%}
+	{%- endif -%}	
+
+	{%- if request.path == '/cart' -%}
+		{%- assign is_admin_interface = true -%}
+	{%- endif -%}
+
+	{%- if request.path == '/checkout' -%}
+		{%- assign is_admin_interface = true -%}
+	{%- endif -%}

@@ -1,0 +1,64 @@
+{{ 'services_band_text.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  <div class="services_band">
+    <div class="services_title">
+      <h2 class="heading{% if section.settings.heading !=blank %} no--heading{% endif %}">{{ section.settings.heading | escape }}</h2>
+
+      {% if section.settings.text !=blank %}
+      <p>{{ section.settings.text }}</p>
+      {% endif %}
+    </div>
+<!--     <div class="services_box_wrapper">
+      <div class="services_left{% if section.settings.sub_text != blank %} content_left{% endif %}">
+        {{ section.settings.sub_text }}
+      </div>
+      <div class="services_right">
+        <h4 class="heading {% if section.settings.headings !=blank %} no-heading{% endif %}">{{ section.settings.heading | escape }}</h4>
+        <ul>
+          {% for block in section.blocks %}
+          <li>
+            {{ block.settings.sub_content }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div> -->
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Custom HTML",
+    "settings": [
+	  {
+		"type": "textarea",
+		"id": "text",
+		"label": "HTML Code"
+      }
+	],
+	"blocks":[
+	  {
+		"type": "text",
+		"name": "Text",
+		"settings": [
+		  {
+            "type": "richtext",
+            "id": "sub_content",
+            "label": "Sub Text"
+          }
+		]
+      }
+	],
+	"presets":[ 
+      {
+		"name": "Custom HTML"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

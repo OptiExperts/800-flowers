@@ -1,0 +1,227 @@
+<!-- /sections/footer.liquid -->
+{% if template contains 'index' %}
+  {% if section.settings.select_fts == "footer_v1" %}
+  {% include 'footer-v1' %}
+  {% elsif section.settings.select_fts == "footer_v2" %}
+  {% include 'footer-v2' %}
+  {% elsif section.settings.select_fts == "footer_v3" %}
+  {% include 'footer-v3' %}
+  {% elsif section.settings.select_fts == "footer_v4" %}
+  {% include 'footer-v4' %}
+  {% elsif section.settings.select_fts == "footer_v5" %}
+  {% include 'footer-v5' %}
+  {% elsif section.settings.select_fts == "footer_v6" %}
+  {% include 'footer-v6' %}
+  {% elsif section.settings.select_fts == "footer_v7" %}
+  {% include 'footer-v7' %}
+  {% elsif section.settings.select_fts == "footer_none" %}
+  {% endif %}
+
+  
+{% else %}
+  {% if section.settings.select_fts_all == "footer_ver1" %}
+  {% include 'footer-v1' %}
+  {% elsif section.settings.select_fts_all == "footer_ver2" %}
+  {% include 'footer-v2' %}
+  {% elsif section.settings.select_fts_all == "footer_ver3" %}
+  {% include 'footer-v3' %}
+  {% elsif section.settings.select_fts_all == "footer_ver4" %}
+  {% include 'footer-v4' %}
+  {% elsif section.settings.select_fts_all == "footer_ver5" %}
+  {% include 'footer-v5' %}
+  {% elsif section.settings.select_fts_all == "footer_ver6" %}
+  {% include 'footer-v6' %}
+  {% elsif section.settings.select_fts_all == "footer_ver7" %}
+  {% include 'footer-v7' %}
+  {% endif %}
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer Homepage"
+    },
+    {
+      "type": "select",
+      "id": "select_fts",
+      "label": "Select Style",
+      "options": [
+        {
+          "value": "footer_v1",
+          "label": "Footer v1"
+        },
+        {
+          "value": "footer_v2",
+          "label": "Footer v2"
+        },
+        {
+          "value": "footer_v3",
+          "label": "Footer v3"
+        },
+        {
+          "value": "footer_v4",
+          "label": "Footer v4"
+        },
+        {
+          "value": "footer_v5",
+          "label": "Footer v5"
+        },
+        {
+          "value": "footer_v6",
+          "label": "Footer v6"
+        },
+	    {
+          "value": "footer_v7",
+          "label": "Footer v7"
+        },
+        {
+          "value": "footer_none",
+          "label": "No Footer"
+        }
+      ],
+      "default": "footer_v1"
+    },
+    {
+      "type": "color",
+      "id": "ft_home_bg_footer",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "ft_home_color_text",
+      "label": "Texts, Icons Color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Footer OtherPages"
+    },
+    {
+      "type": "select",
+      "id": "select_fts_all",
+      "label": "Select Footer Style for All page (unless Homepage)",
+      "options": [
+        {
+          "value": "footer_ver1",
+          "label": "Footer v1"
+        },
+        {
+          "value": "footer_ver2",
+          "label": "Footer v2"
+        },
+        {
+          "value": "footer_ver3",
+          "label": "Footer v3"
+        },
+        {
+          "value": "footer_ver4",
+          "label": "Footer v4"
+        },
+        {
+          "value": "footer_ver5",
+          "label": "Footer v5"
+        },
+        {
+          "value": "footer_ver6",
+          "label": "Footer v6"
+        },
+		{
+          "value": "footer_ver7",
+          "label": "Footer v7"
+        }
+      ],
+      "default": "footer_ver1"
+    },
+    {
+      "type": "color",
+      "id": "ft_other_bg_footer",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "ft_other_color_text",
+      "label": "Texts, Icons Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+	{
+      "type": "link",
+      "name": "Links",
+      "settings": [
+		{	
+          "type": "link_list",
+          "id": "link_lists_menu",
+          "label": "Footer Menu"
+		}
+      ]
+	},
+	{
+      "type": "follow",
+      "name": "Follow Payment",
+      "settings": [
+		{	
+          "type": "text",
+          "id": "heading",
+          "label": "Heading Label"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image First"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image Seconds"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image Third"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Image Four"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Image Five"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Image Six"
+		},
+		{	
+          "type": "image_picker",
+          "id": "image_7",
+          "label": "Image Sevan"
+		},
+		{	
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text"
+		},
+		{	
+          "type": "text",
+          "id": "contact_text",
+          "label": "Contact Text"
+		},
+		{	
+          "type": "html",
+          "id": "contact_info",
+          "label": "Contact Information"
+		}
+      ]
+	}
+  ]
+}
+{% endschema %}
