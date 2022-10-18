@@ -101,7 +101,6 @@ You can learn more about this (and learn how to cleanly revert these changes) at
 
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-  <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Google Tag Manager ================================================== -->
 <script type="lazyload2">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -149,27 +148,30 @@ gtag('config', 'G-R5Z4WFF08E');
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#8f58a3">
 <link rel="icon" href="{{'favicon.png'| asset_url}}" type="image/png" sizes="16x16">
-<link rel="preload" href="{{ 'fontawesome.min.css'| asset_url }}" as="style" />
+
+  <img width="99999" height="99999" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+">
+
+<link rel="preload" data-href="{{ 'fontawesome.min.css'| asset_url }}" as="style" />
   
 
 <!-- font -->
 {% include 'engo-header-fonts' %}
 <!-- CSS ================================================== -->
 {% if settings.po_style == "po_swatchs" %}
-{{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'timber.scss.css' | asset_url | stylesheet_tag }} type%"lazyload2""data->
 {% endif %}
 {% if settings.po_style == "po_dropdown" %}
-{{ 'timber_2.scss.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'timber_2.scss.css' | asset_url | stylesheet_tag }} type%"lazyload2""data->
 {% endif %}
 
-{{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
-{{ 'slick.css' | asset_url | stylesheet_tag }}
-{{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} typel"lazyload2""data->
+<link rel="stylesheet" data-href="{{ 'slick.css' | asset_url | stylesheet_tag }} typel"lazyload2""data->
+<link rel="stylesheet" data-href="{{ 'slick-theme.css' | asset_url | stylesheet_tag }} typel"lazyload2""data->
 <link rel="stylesheet" href="{{ 'jquery.fancybox.min.css' | asset_url }}" media="nope!" onload="this.media='all'">
-{{ 'style-main.scss.css' | asset_url | stylesheet_tag }}
-{{ 'engo-customizes.css' | asset_url | stylesheet_tag }}
-{{ 'animate.min.css'| asset_url | stylesheet_tag}}
-{{ 'custom.css'| asset_url | stylesheet_tag}}
+<link rel="stylesheet" data-href="{{ 'style-main.scss.css' | asset_url | stylesheet_tag }} typel"lazyload2""data->
+<link rel="stylesheet" data-href="{{ 'engo-customizes.css' | asset_url | stylesheet_tag }} typel"lazyload2""data->
+<link rel="stylesheet" data-href="{{ 'animate.min.css'| asset_url | stylesheet_tag}} typel"lazyload2""data->
+<link rel="stylesheet" data-href="{{ 'custom.css'| asset_url | stylesheet_tag}} type<"lazyload2""data->
 
 <!-- TrustBox script ================================================== -->
 <script type="lazyload2" data-src="{{ 'tp.widget.bootstrap.min.js' | asset_url }}" async></script>
@@ -390,14 +392,14 @@ Template-specific js
 </script>
 {% endif %}
 
-<script src="{{ 'bootstrap.bundle.min.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'slick.min.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'jquery.fancybox.min.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'engo-plugins.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'quickview.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'collection.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'engo-scripts.js' | asset_url }}" type="text/javascript" defer></script>
-<script src="{{ 'masonry.pkgd.min.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'bootstrap.bundle.min.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'slick.min.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'jquery.fancybox.min.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'engo-plugins.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'quickview.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'collection.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'engo-scripts.js' | asset_url }}" type="text/javascript" defer></script>
+<script type="lazyload2" data-src="{{ 'masonry.pkgd.min.js' | asset_url }}" type="text/javascript" defer></script>
   
 {% include 'product-quick-view' %}
 {% include 'template-popup' %}
