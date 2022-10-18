@@ -10,7 +10,8 @@
             <div class="box-img">
               <a href="{{block.settings.brand_url}}" title="{{block.settings.title_collection}}">
                 {% if block.settings.brand_img != blank %}
-<!--                 <img data-src="{{block.settings.brand_img | img_url:'master'}}" class="lazyload img-fluid w-100" alt="_img_collection"> -->
+<img data-src="{{block.settings.brand_img | img_url:'master'}}" class="lazyload img-fluid w-100" alt="_img_collection">
+                {%- comment -%}
                 {%- capture sizes -%}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
           {{ block.settings.brand_img | image_url: width: '1920' | image_tag:
             loading: 'lazy',
@@ -18,6 +19,7 @@
             sizes: sizes,
             widths: '165, 360, 535, 750, 1070, 1500, 1920'
           }}
+          {%- endcomment -%}
                 {% else %}
                 <img data-src="//via.placeholder.com/456x456" class="lazyload img-fluid w-100" alt="_img_collection">
                 {% endif %}
